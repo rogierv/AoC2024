@@ -24,7 +24,7 @@ internal class Day_01 : BaseDay
 
 		var result = xs
 			.Zip(ys)
-			.Aggregate(0, (seed, zip) => seed + Math.Abs(zip.First - zip.Second))
+			.Aggregate(0, (seed, zip) => seed + Utils.GetDistance(zip.First, zip.Second))
 			.ToString();
 
 		return new(result);
@@ -47,8 +47,10 @@ internal class Day_01 : BaseDay
 			dict[y] = value + 1;
 		}
 
+		int GetSimilarityScore(int x) => x * dict.GetValueOrDefault(x, 0);
+
 		var result = xs
-			.Aggregate(0, (seed, x) => seed + (x * dict.GetValueOrDefault(x, 0)))
+			.Aggregate(0, (seed, x) => seed + GetSimilarityScore(x))
 			.ToString();
 
 		return new(result);
