@@ -1,4 +1,5 @@
-﻿using AoCHelper;
+﻿using AoC2024.Extensions;
+using AoCHelper;
 
 namespace AoC2024;
 
@@ -24,7 +25,7 @@ internal class Day_01 : BaseDay
 
 		var result = xs
 			.Zip(ys)
-			.Aggregate(0, (seed, zip) => seed + Utils.GetDistance(zip.First, zip.Second))
+			.Aggregate(0, (seed, zip) => seed + zip.GetDistance())
 			.ToString();
 
 		return new(result);
