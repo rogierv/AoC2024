@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Inputs\" />
+    <None Update="Inputs\01_Example.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Inputs\01.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
