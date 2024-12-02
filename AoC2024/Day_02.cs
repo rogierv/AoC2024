@@ -4,30 +4,28 @@ namespace AoC2024;
 
 public class Day_02 : BaseDay
 {
-	public override ValueTask<string> Solve_1()
+	private readonly string _input;
+
+	public Day_02() => _input = File.ReadAllText(base.InputFilePath);
+
+	public static int Solve_1(string input)
 	{
-		var reports = File.ReadAllLines(base.InputFilePath);
-
-		var result = reports
-			.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : seed)
-			.ToString();
-
-		return new(result);
+		var reports = input.Split('\n');
+		return reports.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : seed);
 	}
+
+	public static int Solve_2(string input)
+	{
+		var reports = input.Split('\n');
+		return reports
+			.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : IsSafeWithDampener(Parse(report)) ? ++seed : seed);
+	}
+
+	public override ValueTask<string> Solve_1() => new(Solve_1(_input).ToString());
+
+	public override ValueTask<string> Solve_2() => new(Solve_2(_input).ToString());
 
 	private static int[] Parse(string report) => report.Split(' ').Select(int.Parse).ToArray();
-
-	public override ValueTask<string> Solve_2()
-	{
-		var reports = File.ReadAllLines(base.InputFilePath);
-
-		var result = reports
-			.Aggregate(0, (seed, report) 
-				=> IsSafe(Parse(report)) ? ++seed : IsSafeWithDampener(Parse(report)) ? ++seed : seed)
-			.ToString();
-
-		return new(result);
-	}
 
 	private static bool IsSafe(int[] levels)
 	{
