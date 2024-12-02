@@ -21,10 +21,6 @@ public class Day_02 : BaseDay
 			.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : IsSafeWithDampener(Parse(report)) ? ++seed : seed);
 	}
 
-	public override ValueTask<string> Solve_1() => new(Solve_1(_input).ToString());
-
-	public override ValueTask<string> Solve_2() => new(Solve_2(_input).ToString());
-
 	private static int[] Parse(string report) => report.Split(' ').Select(int.Parse).ToArray();
 
 	private static bool IsSafe(int[] levels)
@@ -71,4 +67,10 @@ public class Day_02 : BaseDay
 		}
 		return false;
 	}
+
+	#region methods to run the AoCHelper
+	public override ValueTask<string> Solve_1() => new(Solve_1(_input).ToString());
+
+	public override ValueTask<string> Solve_2() => new(Solve_2(_input).ToString());
+	#endregion
 }

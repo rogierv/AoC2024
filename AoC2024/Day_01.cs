@@ -56,7 +56,9 @@ public class Day_01 : BaseDay
 		return (int.Parse(split[0]), int.Parse(split[1]));
 	}
 
+	#region methods to run the AoCHelper
 	public override ValueTask<string> Solve_1() => new(Solve_1(_input).ToString());
 
 	public override ValueTask<string> Solve_2() => new(Solve_2(_input).ToString());
+	#endregion
 }
