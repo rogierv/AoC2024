@@ -25,9 +25,7 @@ public class Day_01 : BaseDay
 		xs.Sort();
 		ys.Sort();
 
-		return xs
-			.Zip(ys, (a, b) => (a, b).GetDistance())
-			.Sum();
+		return xs.Zip(ys, (a, b) => (a, b).GetDistance()).Sum();
 	}
 
 	public static int Solve_2(string input)

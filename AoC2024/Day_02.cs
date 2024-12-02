@@ -17,8 +17,7 @@ public class Day_02 : BaseDay
 	public static int Solve_2(string input)
 	{
 		var reports = input.Split('\n');
-		return reports
-			.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : IsSafeWithDampener(Parse(report)) ? ++seed : seed);
+		return reports.Aggregate(0, (seed, report) => IsSafe(Parse(report)) ? ++seed : IsSafeWithDampener(Parse(report)) ? ++seed : seed);
 	}
 
 	private static int[] Parse(string report) => report.Split(' ').Select(int.Parse).ToArray();
@@ -26,44 +25,23 @@ public class Day_02 : BaseDay
 	private static bool IsSafe(int[] levels)
 	{
 		var prev = levels[0];
+		var isIncreasing = levels[1] > prev;
 
-		var increasing = levels[1] > prev;
-
-		if (increasing)
+		foreach (var current in levels.Skip(1))
 		{
-			for (int i = 1; i < levels.Length; i++)
-			{
-				if (levels[i] - prev < 1 || levels[i] - prev > 3)
-				{
-					return false;
-				}
-				prev = levels[i];
-			}
+			var difference = isIncreasing ? current - prev : prev - current;
+			if (difference < 1 || difference > 3) return false;
+			prev = current;
 		}
-		else
-		{
-			for (int i = 1; i < levels.Length; i++)
-			{
-				if (prev - levels[i] < 1 || prev - levels[i] > 3)
-				{
-					return false;
-				}
-				prev = levels[i];
-			}
-		}
-
 		return true;
 	}
 
 	private static bool IsSafeWithDampener(int[] levels)
 	{
-		for (int i = 0; i < levels.Length; i++)
+		foreach (var (i, _) in levels.Index())
 		{
-			var toCheck = levels[0..i].Concat(levels[(i + 1)..levels.Length]).ToArray();
-			if (IsSafe(toCheck))
-			{
-				return true;
-			}
+			var removeLevel = levels[0..i].Concat(levels[(i + 1)..levels.Length]);
+			if (IsSafe([..removeLevel])) return true;
 		}
 		return false;
 	}
