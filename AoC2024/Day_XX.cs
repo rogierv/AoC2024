@@ -6,16 +6,16 @@ public class Day_XX : BaseDay
 {
 	private readonly string _input;
 
-	public Day_XX() => _input = File.ReadAllText(base.InputFilePath);
+	//public Day_XX() => _input = File.ReadAllText(base.InputFilePath);
 
 	public static int Solve_1(string input)
 	{
-		return 0;
+		return -1;
 	}
 
 	public static int Solve_2(string input)
 	{
-		return 0;
+		return -1;
 	}
 
 	#region methods to run the AoCHelper
